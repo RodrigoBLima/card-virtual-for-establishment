@@ -9,7 +9,7 @@ class Establishment(models.Model):
     endereco = models.CharField(max_length=50, verbose_name="Endereço", blank=True)
     numero = models.CharField(max_length=6, verbose_name="Número", blank=True)
     cnpj = models.CharField(max_length=15, null=True, blank=True,verbose_name="CNPJ")
-    email = models.EmailField(unique=True, verbose_name="Email do estabelecimento")
+    email = models.EmailField(max_length=100, unique=True, verbose_name="Email do estabelecimento",)
     password = models.CharField(max_length=50, blank=False, null=False, verbose_name="Senha")
 
     def __str__(self):
