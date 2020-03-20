@@ -4,10 +4,10 @@ from .models import Clients
 
 from .serializers import ClientsSerializer
 
-# from .filt    ersets import ClientsFilter
+from django_filters.rest_framework import DjangoFilterBackend
 
 class ClientsViewSet(viewsets.ModelViewSet):
     model   =  Clients
     queryset = Clients.objects.all()
     serializer_class = ClientsSerializer
-    # filter_class = ClientsFilter
+    filterset_fields = ['establishment_id']
