@@ -43,7 +43,6 @@ export default function Found() {
 
     return (
         <div className={classes.root}>
-
             <Modal
                 isModalOpen={isModalOpen}
                 closeModal={closeModal}

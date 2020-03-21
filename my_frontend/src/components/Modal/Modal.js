@@ -44,18 +44,21 @@ class Modal extends React.Component {
             }
         };
     }
-    // render modal
+
     render() {
+        const { overlay, modal } = this.style        
+        const { children, closeModal, isModalOpen } = this.props
+
         return (
             <div
                 style={{
                     ...this.outerStyle,
-                    display: this.props.isModalOpen ? "block" : "none"
+                    display: isModalOpen ? "block" : "none"
                 }}
             >
-                <div style={this.style.overlay} onClick={this.props.closeModal} />
-                <div onClick={this.props.closeModal} />
-                <div style={this.style.modal}>{this.props.children}</div>
+                <div style={overlay} onClick={closeModal} />
+                <div onClick={closeModal} />
+                <div style={modal}>{children}</div>
             </div>
         );
     }

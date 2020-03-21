@@ -45,7 +45,6 @@ function Form() {
 
     const handleSubmit = () => {
         console.log('form submit')
-        
    
     }
 
@@ -98,8 +97,8 @@ function Form() {
                         </a>
                     </Grid>
                     <Grid item>
-                        Não possui uma conta? <Link to={`/register`} className="router-link" variant="body2"> Registre-se
-                        </Link>
+                        Não possui uma conta? 
+                        <Link to={`/register`} className="router-link" variant="body2"> Registre-se </Link>
                     </Grid>
                 </Grid>
 
