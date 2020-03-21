@@ -12,8 +12,6 @@ import './initial.css'
 import Found from './Found'
 import { Link } from 'react-router-dom'
 
-
-
 const useStyles = makeStyles(theme => ({
   grow: {
     flexGrow: 1,
@@ -53,21 +51,9 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function Initial() {
-  const classes = useStyles();
-  //const [anchorEl, setAnchorEl] = React.useState(null);
+  const classes = useStyles()
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-
-  // const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-
-  //const handleProfileMenuOpen = event => {
-  //setAnchorEl(event.currentTarget);
-  //};
-  //const handleMenuClose = () => {
-  // setAnchorEl(null);
-  //handleMobileMenuClose();
-  //};
-  //const menuId = 'primary-search-account-menu';
 
   const handleMobileMenuClose = () => {
     setMobileMoreAnchorEl(null);
@@ -89,10 +75,10 @@ export default function Initial() {
       onClose={handleMobileMenuClose}
     >
       <MenuItem>
-        <Button component="span"><Link to={`/login`}>Entrar</Link></Button>
+        <Button component="span"><Link to={`/login`} className="router-link">Entrar</Link></Button>
       </MenuItem>
       <MenuItem>
-        <Button variant="outlined"> <Link to={`/register`}>Cadastre-se</Link></Button>
+        <Button variant="outlined"> <Link to={`/register`} className="router-link">Cadastre-se</Link></Button>
       </MenuItem>
     </Menu>
   );
@@ -103,17 +89,17 @@ export default function Initial() {
         <Toolbar>
 
           <Typography className={classes.title} variant="h6" noWrap>
-            Nome do projeto
+            Cartão Fidelidade
           </Typography>
 
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
-            <Button component="span">Entrar</Button>
-            <Button variant="outlined">  Cadastre-se</Button>
+            <Button component="span"><Link to={`/login`} className="router-link">Entrar</Link></Button>
+            <Button variant="outlined"> <Link to={`/register`} className="router-link"> Cadastre-se</Link></Button>
           </div>
           <div className={classes.sectionMobile}>
           <Typography className={classes.title} variant="h6" noWrap>
-            Nome do projeto
+            Cartão Fidelidade
           </Typography>
 
             <IconButton

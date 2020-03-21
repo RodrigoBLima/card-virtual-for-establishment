@@ -10,4 +10,4 @@ class ClientsViewSet(viewsets.ModelViewSet):
     model   =  Clients
     queryset = Clients.objects.all()
     serializer_class = ClientsSerializer
-    filterset_fields = ['establishment_id']
+    filterset_fields = ['establishment_id','id']
