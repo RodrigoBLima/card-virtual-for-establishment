@@ -43,8 +43,7 @@ INSTALLED_APPS = [
     'establishment',
     'products',
     'django_filters',
-    # 'oauth2_provider',
-        'rest_framework.authtoken',
+    'rest_framework.authtoken',
 
 ]
 
@@ -80,6 +79,9 @@ TEMPLATES = [
         },
     },
 ]
+
+AUTH_USER_MODEL = 'establishment.Establishment'
+
 
 WSGI_APPLICATION = 'mysite.wsgi.application'
 
@@ -138,22 +140,16 @@ STATICFILES_DIRS = (
 )
 
 REST_FRAMEWORK = {
-    # Use Django's standard `django.contrib.auth` permissions,
-    # or allow read-only access for unauthenticated users.
-#     # REST_FRAMEWORK = {
-#     'DEFAULT_AUTHENTICATION_CLASSES': [
-#         'oauth2_provider.contrib.rest_framework.OAuth2Authentication',
-#     ],
-# # }
- 'DEFAULT_AUTHENTICATION_CLASSES': (
+
+    'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.TokenAuthentication',
         'rest_framework.authentication.SessionAuthentication',
     ),
-    'DEFAULT_PERMISSION_CLASSES': [
-        # 'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
-                'rest_framework.permissions.IsAuthenticated',
 
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
     ],
+
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
 
 }
