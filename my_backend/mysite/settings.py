@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'establishment',
     'products',
     'django_filters',
+    # 'oauth2_provider',
+        'rest_framework.authtoken',
 
 ]
 
@@ -66,7 +68,7 @@ CORS_ORIGIN_ALLOW_ALL = True
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'my_frontend')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -131,18 +133,34 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-# REST_FRAMEWORK = {
-#     'DEFAULT_FILTER_BACKENDS': (
-#         'django_filters.rest_framework.DjangoFilterBackend',
-#     ),
-# }
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, '../../my_frontend', "build", "static"),  # update the STATICFILES_DIRS
+)
 
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
+#     # REST_FRAMEWORK = {
+#     'DEFAULT_AUTHENTICATION_CLASSES': [
+#         'oauth2_provider.contrib.rest_framework.OAuth2Authentication',
+#     ],
+# # }
+ 'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ),
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+        # 'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+                'rest_framework.permissions.IsAuthenticated',
+
     ],
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
 
 }
+
+
+# Generated token aeec0c5c6e21c52ccda58f22a46dfbd8d9432af1 for user admin
+# url = 'http://127.0.0.1:8000/api/v1'
+# headers = {'Authorization': 'Token 9054f7aa9305e012b3c2300408c3dfdf390fcddf'}
+# r = requests.get(url, headers=headers)
+# https://simpleisbetterthancomplex.com/tutorial/2018/11/22/how-to-implement-token-authentication-using-django-rest-framework.html

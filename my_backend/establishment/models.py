@@ -1,6 +1,7 @@
 from django.db import models
 from clients.models import Clients
 # Create your models here.
+from rest_framework.authtoken.models import Token
 
 
 class Establishment(models.Model):
@@ -11,6 +12,10 @@ class Establishment(models.Model):
     cnpj = models.CharField(max_length=15, null=True, blank=True,verbose_name="CNPJ")
     email = models.EmailField(max_length=100, unique=True, verbose_name="Email do estabelecimento",)
     password = models.CharField(max_length=50, blank=False, null=False, verbose_name="Senha")
+
+    # token = Token.objects.create(user=...)
+    # print(token.key)
+
 
     def __str__(self):
         return self.name_establishment

@@ -19,6 +19,10 @@ from rest_framework import routers
 from establishment.viewsets import EstablishmentViewSet
 from products.viewsets import ProductsViewSet
 from clients.viewsets import ClientsViewSet
+from django.views.generic import TemplateView
+from rest_framework.authtoken.views import obtain_auth_token  # <-- Here
+
+from .views import index  
 
 router = routers.DefaultRouter()
 
@@ -29,4 +33,6 @@ router.register(r'clients', ClientsViewSet)
 urlpatterns = [
     path('admin/', admin.site.urls),
     path(r'api/v1/', include(router.urls)),
+    path('api-token-auth/', obtain_auth_token, name='api_token_auth'),  # <-- And here
+
 ]
