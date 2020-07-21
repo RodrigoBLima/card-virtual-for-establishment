@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
-from establishment.viewsets import EstablishmentViewSet
+from establishment.viewsets import EstablishmentViewSet, login
 from products.viewsets import ProductsViewSet
 from clients.viewsets import ClientsViewSet
 from django.views.generic import TemplateView
@@ -34,5 +34,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path(r'api/v1/', include(router.urls)),
     path('api-token-auth/', obtain_auth_token, name='api_token_auth'),  # <-- And here
+    path('api/login', login)
 
 ]

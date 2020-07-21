@@ -49,15 +49,6 @@ class UserManager(BaseUserManager):
 
 
 class Establishment(AbstractUser):
-
-    # username = None
-    # # email = models.EmailField(_('email address'), unique=True,)
-    # first_name = models.CharField(max_length=35, null=False, blank=False,verbose_name="Nome")
-    # last_name = models.CharField(max_length=35, null=True, blank=True,verbose_name="Sobrenome")
-    # owner = models.ForeignKey('auth.User', related_name='snippets')
-    # created = models.DateTimeField(auto_now_add=True)
-
-
     name_establishment  = models.CharField(max_length=150,blank=False, verbose_name="Nome do Estabelecimento")
     cep = models.CharField(max_length=9, blank=True,verbose_name="CEP")
     endereco = models.CharField(max_length=50, verbose_name="Endereço", blank=True)
@@ -65,10 +56,6 @@ class Establishment(AbstractUser):
     cnpj = models.CharField(max_length=15, null=True, blank=True,verbose_name="CNPJ")
     email = models.EmailField(max_length=100, unique=True, verbose_name="Email do estabelecimento",)
     password = models.CharField(max_length=50, blank=False, null=False, verbose_name="Senha")
-
-    # token = Token.objects.create(user=...)
-    # print(token.key)
-
 
     def __str__(self):
         return self.name_establishment
