@@ -16,24 +16,19 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
-from establishment.viewsets import EstablishmentViewSet, login
+from establishment.viewsets import EstablishmentViewSet
 from products.viewsets import ProductsViewSet
 from clients.viewsets import ClientsViewSet
-from django.views.generic import TemplateView
-from rest_framework.authtoken.views import obtain_auth_token  # <-- Here
-
-from .views import index  
 
 router = routers.DefaultRouter()
 
-router.register(r'establishment', EstablishmentViewSet)
-router.register(r'products', ProductsViewSet)
-router.register(r'clients', ClientsViewSet)
+router.register(r'establishment', EstablishmentViewSet, basename='estabelecimento')
+router.register(r'products', ProductsViewSet, basename='produtos')
+router.register(r'clients', ClientsViewSet, basename='cliente')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path(r'api/v1/', include(router.urls)),
-    path('api-token-auth/', obtain_auth_token, name='api_token_auth'),  # <-- And here
-    path('api/login', login)
+    path('o/', include('oauth2_provider.urls', namespace='oauth2_provider'))
 
 ]
