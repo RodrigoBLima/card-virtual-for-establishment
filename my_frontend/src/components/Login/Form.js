@@ -51,6 +51,37 @@ function Form() {
         return form_data;
       }
     
+
+    function getUser() {
+        console.log(localStorage.getItem('client-token'))
+        try {
+            const url = myConfig.API_URL + "/accounts/me/";
+            axios({
+                baseURL: url,
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('client-token')}`
+                },
+            })
+                .then(res => {
+
+                    const est = res.data;
+                    const est_id = res.data.current_farm
+                    const est_name = res.data.current_farm_name.replace('"',"")
+
+                    localStorage.setItem("est_id", JSON.stringify(est_id));
+                    localStorage.setItem("est_name", est_name);
+                    localStorage.setItem("est", JSON.stringify(est));
+
+                    window.location.reload(false);
+
+                });
+
+        } catch (err) {
+            console.log('ERROR !', err)
+        }
+    }
+
     const handleSubmit = () => {
         console.log('form submit')
         const LOGIN_URL = `${myConfig.API_URL}/o/token/`;
@@ -62,6 +93,7 @@ function Form() {
           })
             .then((res) => {
               if (res.status === 200) {
+                getUser()
                 console.log(res.data);
                 localStorage.setItem("est-token", res.data.access_token);
                 toast("Login realizado com sucesso.");

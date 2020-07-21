@@ -8,6 +8,12 @@ class EstablishmentViewSet(viewsets.ModelViewSet):
     model = Establishment
     serializer_class = EstablishmentSerializer
 
+
+    @decorators.action(detail=False, methods=['get'])
+    def me(self, request, pk=None):
+        return response.Response(self.serializer_class(request.user, context={'request': request}).data)
+
+
     def create(self, request, *args, **kwargs):
         serializer = UserSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
