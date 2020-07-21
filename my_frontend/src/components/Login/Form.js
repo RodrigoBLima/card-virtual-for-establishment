@@ -6,6 +6,8 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import axios from 'axios'
 import { Link } from 'react-router-dom'
+import  myConfig from '../../constants/index'
+import { ToastContainer, toast } from "react-toastify";
 
 const useStyles = makeStyles(theme => ({
     paper: {
@@ -34,18 +36,43 @@ function Form() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
-    const getFormData = () => {
-        let form_data = new FormData();
-
-        form_data.append('email', email);
-        form_data.append('password', password);
-
-        return form_data
-    }
-
+    function formData() {
+        const form_data = new FormData();
+    
+        form_data.append("username", email);
+        form_data.append("password", password);
+        form_data.append("grant_type", "password");
+        form_data.append("client_id", "your_client_id");
+        form_data.append(
+          "client_secret",
+          "your_client_Secret"
+        );
+    
+        return form_data;
+      }
+    
     const handleSubmit = () => {
         console.log('form submit')
-   
+        const LOGIN_URL = `${myConfig.API_URL}/o/token/`;
+
+        axios({
+            baseURL: LOGIN_URL,
+            method: "POST",
+            data: formData(),
+          })
+            .then((res) => {
+              if (res.status === 200) {
+                console.log(res.data);
+                localStorage.setItem("est-token", res.data.access_token);
+                toast("Login realizado com sucesso.");
+                window.location.href = "/";
+              }
+            })
+            .catch((error) => {
+              console.log("ERROR", error);
+              toast("Email ou senha inválidos.");
+            });
+
     }
 
 
@@ -103,6 +130,7 @@ function Form() {
                 </Grid>
 
             </form>
+            <ToastContainer />
         </div>
 
 
